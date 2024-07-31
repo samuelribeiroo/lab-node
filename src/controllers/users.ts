@@ -14,7 +14,7 @@ export const getListUsers = async (request: express.Request, response: express.R
     // Only to testing
     // return response.json({ message: "Its working." })
 
-    return response.sendStatus(200).json(users)
+    return response.json(users).sendStatus(200)
     
   } catch (error) {
     return response.sendStatus(400).json({ message: "Invalid request." })
