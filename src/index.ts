@@ -25,7 +25,7 @@ app.use(cookieParser())
 
 const server = http.createServer(app)
 
-server.listen(9090, () => console.log(`Server created at: http://localhost:${PORT}`))
+server.listen(PORT, () => console.log(`Server created at: http://localhost:${PORT}`))
 
 // The connection with MongoDB is running on below, for question of good practices always use the promise from Mongo.
 
