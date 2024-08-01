@@ -6,6 +6,8 @@ import cors from "cors"
 import dotenv from "dotenv"
 import express from "express"
 import mongoose from "mongoose"
+import router from "./router/route"
+
 import { registerUserController } from "./controllers/auth"
 import { deleteUsers, getListUsers, getUserById } from "./controllers/users"
 
@@ -40,9 +42,4 @@ mongoose.connection.on("error", (error: Error) => console.log(`Houve erro durant
 
 // The lines above basically say: 'Dont use JS promise, use my promise instead.'
 
-// Fow while we'll use this syntax (bring from controller -> run at main index.ts).
-// But this thing later will be refactored.
-app.get("/users", getListUsers)
-app.get("/users/:id", getUserById)
-app.post("/users", registerUserController)
-app.delete("/users/:id", deleteUsers)
+app.use(router) // Refactor made it, but need be tested.

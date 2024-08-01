@@ -32,6 +32,6 @@ export const registerUserController = async (request: express.Request, response:
     return response.json(onCreateNewUser).sendStatus(201)
   } catch (error) {
     console.log(`There some error on your request: ${error}`)
-    return response.sendStatus(400)
+    return response.sendStatus(400).end()
   }
 }
