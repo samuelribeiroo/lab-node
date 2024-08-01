@@ -11,7 +11,7 @@ export const registerUserController = async (request: express.Request, response:
     }
 
     if (password.length < 8) {
-      return response.json({ error: "Password should have more than 8 characters." }).sendStatus
+      return response.json({ error: "Password should have more than 8 characters." }).sendStatus(400)
     }
 
     const isExistAlready = await UserModel.findOne({ useremail })
