@@ -4,6 +4,8 @@ import { deleteUsers, getListUsers, getUserById } from "../controllers/users"
 
 const router = Router()
 
+router.post("/auth", registerUserController)
+router.post("/auth/:id", loginUserController)
 router.get("/users", getListUsers)
 router.get("/users/:id", getUserById)
 router.post("/users", registerUserController)
