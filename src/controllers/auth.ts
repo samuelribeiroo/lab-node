@@ -15,7 +15,7 @@ export const registerUserController = async (request: express.Request, response:
       return response.json({ error: "Password should have more than 8 characters." }).sendStatus(400)
     }
 
-    const isExistAlready = await UserModel.findOne({ useremail })
+    const isExistAlready = await UserModel.findOne({ $or: [{ username }, { useremail }] })
 
     if (isExistAlready) {
       return response.json({ error: "Can't register user. This email alredy exists." }).sendStatus(400)
@@ -51,7 +51,9 @@ export const loginUserController = async (request: express.Request, response: ex
       return response.json({ error: "User dont exist." })
     }
 
-    const { authentication: { password: hashedPassword } } = verifyUserInformation
+    const {
+      authentication: { password: hashedPassword },
+    } = verifyUserInformation
 
     const isValidPassword = await bcrypt.compare(password, hashedPassword)
 
