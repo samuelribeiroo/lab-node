@@ -19,7 +19,7 @@ describe("registerUserController", () => {
     const registerUserSpy = jest.spyOn(authController, "registerUserController")
 
     registerUserSpy.mockImplementationOnce(async (request, response) => {
-      return response.status(400)
+      return response.status(400).json({ error: "All fields are required to proceed with registration." })
     })
 
     await registerUserController(request, response)
