@@ -1,12 +1,6 @@
 import type express from "express"
 import { UserModel, deleteUserById, getUsers } from "../database/users"
 
-const usersMock = [
-  { id: 1, name: "Usuário01" },
-  { id: 2, name: "Usuário02" },
-  { id: 3, name: "Usuário03" },
-]
-
 export const getListUsers = async (request: express.Request, response: express.Response) => {
   try {
     const users = await getUsers()
@@ -16,7 +10,7 @@ export const getListUsers = async (request: express.Request, response: express.R
 
     return response.json(users).sendStatus(200)
   } catch (error) {
-    return response.sendStatus(400).json({ message: "Invalid request." })
+    return response.sendStatus(400).json({ error: "Invalid request." })
   }
 }
 
@@ -31,10 +25,32 @@ export const getUserById = async (request: express.Request, response: express.Re
     }
 
     return response.json(findUserById).sendStatus(200)
-
   } catch (error) {
-    
     return response.sendStatus(400).json({ error: "Register was not founded." })
+  }
+}
+
+export const updateUser = async (request: express.Request, response: express.Response) => {
+  try {
+    const { id } = request.params
+
+    const updatedData = request.body
+
+    const findUser = await UserModel.findById(id)
+
+    if (!findUser) {
+      return response.json({ error: "User does not exist" }).sendStatus(400)
+    }
+
+    const updateUserInfo = await UserModel.findByIdAndUpdate(
+      id,
+      { $set: updatedData },
+      { new: true, runValidators: true },
+    )
+
+    return response.json(updateUserInfo).sendStatus(200)
+  } catch (error) {
+    return response.json({ error: `Houve erro durante a requisição: ${error}` }).sendStatus(400)
   }
 }
 
@@ -46,6 +62,6 @@ export const deleteUsers = async (request: express.Request, response: express.Re
 
     return response.sendStatus(204).json(deletedUser)
   } catch (error) {
-    return response.sendStatus(400).json({ message: "Invalid request." })
+    return response.sendStatus(400).json({ error: "Invalid request." })
   }
 }
