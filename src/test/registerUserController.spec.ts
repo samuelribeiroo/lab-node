@@ -25,6 +25,6 @@ describe("registerUserController", () => {
     await registerUserController(request, response)
 
     expect(response.status).toHaveBeenCalledWith(400)
-    // expect(response.json).toHaveBeenCalledWith({ error: "All fields are required to proceed with registration." })
+    expect(response.json).toHaveBeenCalledWith({ error: "All fields are required to proceed with registration." })
   })
 })
