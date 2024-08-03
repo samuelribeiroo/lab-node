@@ -4,8 +4,9 @@
     "moduleResolution": "NodeNext",
     "baseUrl": "src",
     "outDir": "dist",
+    "types": ["jest", "express", "supertest"],
     "sourceMap": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
   },
   "include": ["src/**/*"]
 }
