@@ -1,5 +1,4 @@
-import { Express, Request, Response } from "express"
-import { mocked } from "jest-mock"
+import { Request, Response } from "express"
 import * as authController from "../controllers/auth"
 import { registerUserController } from "../controllers/auth"
 
@@ -36,7 +35,7 @@ describe("registerUserController", () => {
     expect(response.json).toHaveBeenCalledWith({ error: "All fields are required to proceed with registration." })
   })
 
-  it("Password should be has more than 8 characters", async () => {
+  it("Password should be have more than 8 characters", async () => {
     let request = { body: { password: "1234" } } as Request
 
     let response = {
