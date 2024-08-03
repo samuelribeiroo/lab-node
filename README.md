@@ -21,3 +21,40 @@
 - [ ] O usuário deve ser capaz de se logar. Os dados requeridos são email e password, e casa haja de erro de um ou de ambos deverá ser retornado  o <strong>status code: 400 - Invalid Request.</strong> ✔
 
 - [ ] <strong>Seria interessante, mas não obrigatório adição de testes nos controllers com o Jest...</strong>
+
+<h3>Tecnlogias e ferramentas usadas</h3>
+
+<ul>
+  <li>Node v.20.12.1</li>
+  <li>TypeScript 5.5.3</li>
+  <li>Nodemon 3.1.4</li>
+  <li>Express 4.19.2</li>
+  <li>Jest 29.7.0</li>
+  <li>Insomnia</li>
+</ul>
+
+## Para rodar localmente o projeto, siga as instruções abaixo.
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/samuelribeiroo/lab-node.git
+```
+
+Inicialize o repositório 
+
+```bash
+  cd users-api
+```
+
+Instale as dependências
+
+```bash
+  npm install
+```
+
+Inicie o servidor
+
+```bash
+  npm start
+```
