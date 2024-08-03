@@ -8,9 +8,6 @@ import express from "express"
 import mongoose from "mongoose"
 import router from "./router/route"
 
-import { registerUserController } from "./controllers/auth"
-import { deleteUsers, getListUsers, getUserById } from "./controllers/users"
-
 dotenv.config()
 
 const PORT = process.env.PORT
