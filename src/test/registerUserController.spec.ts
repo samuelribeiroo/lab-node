@@ -1,10 +1,18 @@
 import { Express, Request, Response } from "express"
+import { mocked } from "jest-mock"
 import * as authController from "../controllers/auth"
 import { registerUserController } from "../controllers/auth"
 
 jest.mock("../controllers/auth")
 
-// The describe method receive two parameters: Description (String) and the second is a callback
+const mockShortPassword = async (request: Request, response: Response) => {
+  if (request.body.password.length < 8) {
+    response.sendStatus(400).json({ error: "Password should have more than 8 characters." })
+  } else {
+    response.sendStatus(200)
+  }
+}
+
 describe("registerUserController", () => {
   it("Should return status code 400 if is missing somethig at request.", async () => {
     let request = { body: {} } as unknown as Request
@@ -26,5 +34,18 @@ describe("registerUserController", () => {
 
     expect(response.status).toHaveBeenCalledWith(400)
     expect(response.json).toHaveBeenCalledWith({ error: "All fields are required to proceed with registration." })
+  })
+
+  it("Password should be has more than 8 characters", async () => {
+    let request = { body: { password: "1234" } } as Request
+
+    let response = {
+      sendStatus: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as unknown as Response
+
+    await mockShortPassword(request, response)
+
+    expect(response.sendStatus).toHaveBeenCalledWith(400)
   })
 })
