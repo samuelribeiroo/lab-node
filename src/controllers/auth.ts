@@ -50,9 +50,7 @@ export const loginUserController = async (request: express.Request, response: ex
       return response.json({ error: "User dont exist." })
     }
 
-    const {
-      authentication: { password: hashedPassword },
-    } = verifyUserInformation
+    const { authentication: { password: hashedPassword } } = verifyUserInformation
 
     const isValidPassword = await bcrypt.compare(password, hashedPassword)
 

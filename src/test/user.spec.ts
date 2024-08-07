@@ -3,7 +3,7 @@ import request from "supertest"
 import { getUserById } from "../controllers/users"
 import { UserModel } from "../database/users"
 
-jest.setTimeout(8000) // Every test running in this file have a limite of 8s to finish.
+jest.setTimeout(8000) // Every test running in this file have a limit of 8s to finish.
 
 jest.mock("../database/users", () => ({
   UserModel: {
