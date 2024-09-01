@@ -24,8 +24,8 @@ export const createNewUser = async (values: Record<string, any>) => {
 
 export const getUsers = () => UserModel.find()
 
-export const getUserByEmail = (email: string) => UserModel.findOne({ email })
+export const getUserByEmail = (email: string) => UserModel.findOne({ username: email })
 
-export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ id })
+export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id })
 
 // This file has the main goal set how to data will behavior at DB. Will be created UserSchema and UserModel
