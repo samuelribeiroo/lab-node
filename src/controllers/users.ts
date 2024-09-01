@@ -5,12 +5,9 @@ export const getListUsers = async (request: express.Request, response: express.R
   try {
     const users = await getUsers()
 
-    // Only to testing
-    // return response.json({ message: "Its working." })
-
-    return response.json(users).sendStatus(200)
+    return response.status(200).json(users)
   } catch (error) {
-    return response.sendStatus(400).json({ error: "Invalid request." })
+    return response.status(400).json({ error: "Invalid request." })
   }
 }
 
@@ -21,12 +18,12 @@ export const getUserById = async (request: express.Request, response: express.Re
     const findUserById = await UserModel.findOne({ _id: new Object(id) })
 
     if (!findUserById) {
-      return response.sendStatus(400).end()
+      return response.sendStatus(400)
     }
 
-    return response.json(findUserById).sendStatus(200)
+    return response.status(200).json(findUserById)
   } catch (error) {
-    return response.sendStatus(400).json({ error: "Register was not founded." })
+    return response.status(400).json({ error: "Register was not founded." })
   }
 }
 
@@ -39,7 +36,7 @@ export const updateUser = async (request: express.Request, response: express.Res
     const findUser = await UserModel.findById(id)
 
     if (!findUser) {
-      return response.json({ error: "User does not exist" }).sendStatus(400)
+      return response.status(400).json({ error: "User does not exist" })
     }
 
     const updateUserInfo = await UserModel.findByIdAndUpdate(
@@ -48,9 +45,9 @@ export const updateUser = async (request: express.Request, response: express.Res
       { new: true, runValidators: true },
     )
 
-    return response.json(updateUserInfo).sendStatus(200)
+    return response.status(200).json(updateUserInfo)
   } catch (error) {
-    return response.json({ error: `Houve erro durante a requisição: ${error}` }).sendStatus(400)
+    return response.status(400).json({ error: `Houve erro durante a requisição: ${error}` })
   }
 }
 
@@ -60,8 +57,8 @@ export const deleteUsers = async (request: express.Request, response: express.Re
 
     const deletedUser = await deleteUserById(id)
 
-    return response.sendStatus(204).json(deletedUser)
+    return response.status(204).json(deletedUser)
   } catch (error) {
-    return response.sendStatus(400).json({ error: "Invalid request." })
+    return response.status(400).json({ error: "Invalid request." })
   }
 }
